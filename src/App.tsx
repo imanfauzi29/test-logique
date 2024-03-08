@@ -1,15 +1,16 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Home from "./pages/Home";
+
+const queryClient = new QueryClient();
 
 function App() {
-
   return (
-    <>
-    <div className="h-screen w-full">
-      <div className="flex flex-col justify-between items-center">
-        <img src="/logo.webp" className="w-20" />
+    <QueryClientProvider client={queryClient}>
+      <div className="h-screen max-w-screen-sm mx-auto">
+        <Home />
       </div>
-    </div>
-    </>
-  )
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
