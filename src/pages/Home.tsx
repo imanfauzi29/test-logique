@@ -14,20 +14,21 @@ const Home = () => {
   const [musicQuery, setMusicQuery] = useState("");
   const [showList, setShowList] = useState(false);
 
-  const { data, fetchNextPage, isLoading } = useInfiniteQuery({
-    queryKey: ["music", musicQuery],
-    /** Query */
-    queryFn: async ({ pageParam }) =>
-      searchMusic({ term: musicQuery, limit: pageParam }),
-    /** Initial limit */
-    initialPageParam: 4,
-    /** Pagination to get more data */
-    getNextPageParam: (lastPage) => lastPage.resultCount + 4,
-    /** Don't fetch when music query is empty */
-    enabled: !!musicQuery,
-    /** Refetch on window focus */
-    refetchOnWindowFocus: false,
-  });
+  const { data, fetchNextPage, isLoading, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ["music", musicQuery],
+      /** Query */
+      queryFn: async ({ pageParam }) =>
+        searchMusic({ term: musicQuery, limit: pageParam }),
+      /** Initial limit */
+      initialPageParam: 4,
+      /** Pagination to get more data */
+      getNextPageParam: (lastPage) => lastPage.resultCount + 4,
+      /** Don't fetch when music query is empty */
+      enabled: !!musicQuery,
+      /** Refetch on window focus */
+      refetchOnWindowFocus: false,
+    });
 
   /**
    * Handles updating the music query state when the
@@ -77,6 +78,7 @@ const Home = () => {
                 text="Load more"
                 type="button"
                 onClick={handleLoadMore}
+                isLoading={isFetchingNextPage}
                 className="border border-gray-300 bg-gray-200 text-gray-500 max-w-44 block mx-auto"
               />
             </div>
