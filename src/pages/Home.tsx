@@ -47,7 +47,7 @@ const Home = () => {
     <>
       <div
         className={cn(
-          "h-full w-full bg-linearColor fixed z-10 transition-all duration-700",
+          "h-full w-full bg-linearColor fixed z-10 left-0 transition-all duration-700",
           showList ? "-translate-y-full" : ""
         )}
       >
